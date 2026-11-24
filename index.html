@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRY CRM · Gestión de clientes para empresas</title>
+<meta name="description" content="FRY CRM es una aplicación web de gestión de clientes, oportunidades, presupuestos, tickets, pagos y agenda sobre Google Workspace.">
+<style>
+  :root{--bg:#f3f4f6;--card:#fff;--txt:#111827;--sub:#4b5563;--brand:#2563eb;--borde:#e5e7eb}
+  @media (prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--txt:#f1f5f9;--sub:#cbd5e1;--brand:#60a5fa;--borde:#334155}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+  header,main,footer{max-width:860px;margin:0 auto;padding:24px 20px}
+  h1{font-size:2.2rem;margin:.2em 0}
+  h2{font-size:1.3rem;margin-top:0}
+  .lead{font-size:1.15rem;color:var(--sub)}
+  .boton{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;font-weight:600;padding:13px 26px;border-radius:10px}
+  @media (prefers-color-scheme:dark){.boton{color:#0f172a}}
+  .boton:focus-visible,a:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+  .rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:24px 0}
+  .tarjeta{background:var(--card);border:1px solid var(--borde);border-radius:12px;padding:18px}
+  .tarjeta p{margin:.3em 0 0;color:var(--sub);font-size:.95rem}
+  a{color:var(--brand)}
+  footer{color:var(--sub);font-size:.9rem;border-top:1px solid var(--borde)}
+</style>
+</head>
+<body>
+<header>
+  <h1>FRY CRM</h1>
+  <p class="lead">Aplicación web para que tu empresa gestione clientes, oportunidades de venta, presupuestos, incidencias, cobros y agenda en un solo sitio, sobre su propia cuenta de Google.</p>
+  <p><a class="boton" href="https://fryserviciosdigitales.github.io/fry-crm/">Acceder a la aplicación</a></p>
+</header>
+<main>
+  <div class="rejilla">
+    <section class="tarjeta"><h2>Clientes y contactos</h2><p>Fichas de empresa, personas de contacto, documentos y cronología de actividad.</p></section>
+    <section class="tarjeta"><h2>Ventas</h2><p>Oportunidades, presupuestos con líneas, aprobación de descuentos y seguimiento de cobros.</p></section>
+    <section class="tarjeta"><h2>Atención al cliente</h2><p>Tickets con plazos de respuesta (SLA), comentarios y valoración de satisfacción.</p></section>
+    <section class="tarjeta"><h2>Agenda y tareas</h2><p>Tareas, citas y avisos, con integración opcional con Google Calendar.</p></section>
+    <section class="tarjeta"><h2>Control y seguridad</h2><p>Roles y permisos por usuario, auditoría de acciones, papelera y copias de seguridad.</p></section>
+    <section class="tarjeta"><h2>Protección de datos</h2><p>Los datos de cada empresa permanecen en su propia cuenta de Google. Gestión de consentimientos y solicitudes RGPD.</p></section>
+  </div>
+  <p>El acceso se realiza con "Iniciar sesión con Google". Solo pueden usar la aplicación las personas autorizadas por el administrador de cada empresa. Consulta la <a href="privacidad.html">política de privacidad</a>.</p>
+</main>
+<footer>
+  <p>© <span id="anio">2026</span> FRY CRM · <a href="privacidad.html">Política de privacidad</a></p>
+</footer>
+<script>document.getElementById("anio").textContent=new Date().getFullYear();</script>
+</body>
+</html>
