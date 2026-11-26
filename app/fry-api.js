@@ -9,8 +9,30 @@
   if (window.google && window.google.script && window.google.script.run) return;
 
   var CFG = window.FRY_CONFIG || {};
-  var API_URL = String(CFG.API_URL || "");
   var CLIENT_ID = String(CFG.GOOGLE_CLIENT_ID || "");
+
+  /*
+   * Qué servidor (API) usa esta página:
+   *  - Formato nuevo: config.js trae una lista CLIENTES {codigo: url}. El enlace elige la empresa con ?c=codigo
+   *    (o se usa CLIENTE_POR_DEFECTO). Solo se aceptan URLs de esa lista: así nadie puede crear un enlace que
+   *    envíe el inicio de sesión de un usuario a un servidor ajeno.
+   *  - Formato antiguo: una sola API_URL.
+   */
+  function resolverApi() {
+    var clientes = CFG.CLIENTES;
+    if (clientes && typeof clientes === "object") {
+      var codigo = "";
+      try { codigo = new URLSearchParams((window.location && window.location.search) || "").get("c") || ""; } catch (e) {}
+      if (!codigo) codigo = String(CFG.CLIENTE_POR_DEFECTO || "");
+      if (!/^[A-Za-z0-9_-]{1,40}$/.test(codigo) || !Object.prototype.hasOwnProperty.call(clientes, codigo)) {
+        return { url: "", error: "No se reconoce la empresa de este enlace. Pide a FRY el enlace correcto." };
+      }
+      return { url: String(clientes[codigo] || ""), error: "" };
+    }
+    return { url: String(CFG.API_URL || ""), error: "" };
+  }
+  var API = resolverApi();
+  var API_URL = API.url;
   var CLAVE_TOKEN = "fry_crm_token";
   var esperandoLogin = null;
   var cargandoGis = null;
@@ -149,6 +171,7 @@
 
   /* ---------- llamadas al servidor ---------- */
   function llamar(fn, args, reintento) {
+    if (API.error) return Promise.reject(new Error(API.error));
     if (!configurado()) {
       return Promise.reject(new Error("Falta configurar API_URL y GOOGLE_CLIENT_ID en config.js."));
     }
